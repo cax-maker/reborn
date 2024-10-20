@@ -9,13 +9,14 @@ k1 = k / m
 g = 9.8
 n = 20
 error = 1e-6
-angle = math.atan(0.05)
+angle = math.atan(z / s)
 s = math.sqrt(x**2 + y**2)
 for i in range(n):
     t = (math.exp(k1 * s) - 1) / (k1 * v0 * math.cos(angle))
     z_actual = v0 * t * math.sin(angle) - 0.5 * g * t ** 2
     dz = z - z_actual
-    angle += dz / (v0 * math.cos(angle))
+    z += dz
+    angle = math.atan(z / s)
     if abs(dz) < error:
         break
 angle %= math.pi
